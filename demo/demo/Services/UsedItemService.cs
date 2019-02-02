@@ -17,6 +17,12 @@ namespace Demo.Services
 
         public List<UsedItem> GetAllUsedItems()
         {
+            // linq query som nedhenter alle useditems 
+            return _connection.Table<UsedItem>().ToListAsync().Result;
+        }
+
+        public List<UsedItem> GetAllUsedItemsByLatest()
+        {
             // linq query som nedhenter 5 useditems - hvorefter de bliver sorteret efter date
             return _connection.Table<UsedItem>().OrderBy(ui => ui.Date).Take(5).ToListAsync().Result;
         }

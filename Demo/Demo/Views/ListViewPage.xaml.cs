@@ -1,4 +1,5 @@
-﻿using Demo.Services;
+﻿using System;
+using Demo.Services;
 using Xamarin.Forms;
 
 namespace Demo.Views
@@ -19,11 +20,14 @@ namespace Demo.Views
 
         void OnPopulatingListView()
         {
-            usedItemsListView.ItemsSource = _usedItemsService.GetAllUsedItems();
+            usedItemsListView.ItemsSource = _usedItemsService.GetAllUsedItemsByLatest();
         }
 
         void OnSearchTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
+            // nulstiller dropdown menu
+            dropdownMenu.SelectedIndex = -1;
+
             usedItemsListView.ItemsSource = _usedItemsService.GetUsedItemsBySearch(e.NewTextValue);
 
             // hvis søgefelt er tomt kaldes OnPopulatingListView() -metoden
@@ -33,16 +37,24 @@ namespace Demo.Views
             }
         }
 
+        void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            Picker picker = (Picker)sender;
+
+            if (picker.SelectedIndex == 0)
+            {
+                usedItemsListView.ItemsSource = _usedItemsService.GetAllUsedItems();
+            }
+            if (picker.SelectedIndex == 1)
+            {
+                usedItemsListView.ItemsSource = _usedItemsService.GetAllUsedItemsByLatest();
+            }
+
+        }
+
         void OnAdd(object sender, System.EventArgs e)
         {
         }
 
-        void OnUpdate(object sender, System.EventArgs e)
-        {
-        }
-
-        void OnDelete(object sender, System.EventArgs e)
-        {
-        }
     }
 }

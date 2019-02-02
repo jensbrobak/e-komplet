@@ -3,18 +3,31 @@
     <ContentPage.Content>
     <StackLayout>
             <StackLayout Orientation="Horizontal">
-            <Button Text="Tilføj" Clicked="OnAdd" />
-            <Button Text="Opdatér" Clicked="OnUpdate" HorizontalOptions="CenterAndExpand" />
-            <Button Text="Slet" Clicked="OnDelete" />
+            <Button Text="Tilføj materiale" Clicked="OnAdd" />
         </StackLayout>
             <SearchBar 
             Placeholder="Søg efter materialer" 
             TextChanged="OnSearchTextChanged" 
             x:Name="searchBar" />
-        <ListView x:Name="usedItemsListView">
+            <Picker x:Name="dropdownMenu" HorizontalOptions="FillAndExpand" Title="Filter" SelectedIndexChanged="OnPickerSelectedIndexChanged">
+            <Picker.Items >
+            <x:String>Alle materialer</x:String>
+            <x:String>Seneste materialer</x:String>
+            </Picker.Items>
+            </Picker>
+        <ListView x:Name="usedItemsListView" HasUnevenRows="true">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Date}" />
+                        
+      <ViewCell>
+        <StackLayout>
+        <Label Text="{Binding Name}" Font="15,Bold" />
+        <Label Text="{Binding Amount, StringFormat='Antal: {0}'}"/>
+        <Label Text="{Binding Itemnumber, StringFormat='Materialenr.: {0}'}"/>
+        <Label Text="{Binding ItemGroup, StringFormat='Materialekategori: {0}'}"/>
+        <Label Text="{Binding Date}" TextColor="Gray" />
+        </StackLayout>
+      </ViewCell>
                   
                 </DataTemplate>
             </ListView.ItemTemplate>
