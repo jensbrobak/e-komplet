@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace demo
+namespace Demo
 {
     public interface ISQLiteDb
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite;
 
-namespace demo.models
+namespace Demo.Models
 {
     [Table("Wholesalers")]
     public class Wholesaler

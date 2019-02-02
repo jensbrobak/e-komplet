@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace demo.pages
+namespace Demo.Views
 {
     public partial class AddItem : ContentPage
     {

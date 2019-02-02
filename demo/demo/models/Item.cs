@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
-namespace demo.models
+namespace Demo.Models
 {
     [Table("Items")]
     public class Item
@@ -14,7 +14,8 @@ namespace demo.models
         public string Itemnumber { get; set; }
         public string ItemGroup { get; set; }
         public double Price { get; set; }
-        //public IEnumerable<Wholesaler> WholesalerIDs { get; set; } - sql query
+        [OneToMany]
+        public List<Wholesaler> WholesalerIDs { get; set; }
         public string ImageURL { get; set; }
     }
 }

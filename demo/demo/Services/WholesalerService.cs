@@ -1,5 +1,5 @@
 ﻿using System;
-namespace demo.Services
+namespace Demo.Services
 {
     public class WholesalerService
     {

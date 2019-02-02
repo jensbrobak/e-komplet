@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:demo" x:Class="demo.MainPage">
-    <StackLayout>
-        <ListView x:Name="listView" />
-        <!-- Place new controls here -->
-        <Label Text="Welcome to shit!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-    </StackLayout>
-</ContentPage>

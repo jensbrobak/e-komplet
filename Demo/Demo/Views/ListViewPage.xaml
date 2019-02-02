@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.ListViewPage">
+    <ContentPage.Content>
+    <StackLayout>
+            <StackLayout Orientation="Horizontal">
+            <Button Text="Tilføj" Clicked="OnAdd" />
+            <Button Text="Opdatér" Clicked="OnUpdate" HorizontalOptions="CenterAndExpand" />
+            <Button Text="Slet" Clicked="OnDelete" />
+        </StackLayout>
+            <SearchBar 
+            Placeholder="Søg efter materialer" 
+            TextChanged="OnSearchTextChanged" 
+            x:Name="searchBar" />
+        <ListView x:Name="usedItemsListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Date}" />
+                  
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

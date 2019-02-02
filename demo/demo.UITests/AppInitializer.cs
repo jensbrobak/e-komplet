@@ -2,7 +2,7 @@
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
-namespace demo.UITests
+namespace Demo.UITests
 {
     public class AppInitializer
     {

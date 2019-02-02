@@ -1,13 +1,15 @@
 ﻿using System;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
-namespace demo.models
+namespace Demo.Models
 {
     [Table("UsedItems")]
     public class UsedItem
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
+        [ForeignKey(typeof(Wholesaler))]
         public int WholesalerID { get; set; }
         [MaxLength(255)]
         public string Name { get; set; }
