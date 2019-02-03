@@ -10,8 +10,8 @@
                 <EntryCell Label="Pris" Text="{Binding Price}" IsEnabled="false" />
                 <EntryCell Label="Antal" Text="{Binding Amount}" IsEnabled="false" />
             </TableSection>
-            <TableSection Title="Grossist">
-                <EntryCell Label="Grossist ID" Text="{Binding WholesalerID}" IsEnabled="false" />
+            <TableSection Title="Grossist" x:Name="wholesaler">
+                <EntryCell Label="Navn" Text="{Binding Name}" IsEnabled="false" />
             </TableSection>
             <TableSection Title="Tilføj Antal af enheder til opgave">
                 <EntryCell Label="Antal:" Text="{Binding Amount}" Keyboard="Numeric" />

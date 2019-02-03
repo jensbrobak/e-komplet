@@ -10,6 +10,7 @@ namespace Demo.Views
     {
         public event EventHandler<UsedItem> UsedItemUpdated;
         private UsedItemService _usedItemsService;
+        private WholesalerService _wholesalersService;
         double _amount;
 
         public OpenItemPage(UsedItem usedItem)
@@ -17,6 +18,9 @@ namespace Demo.Views
             InitializeComponent();
 
             _usedItemsService = new UsedItemService();
+            _wholesalersService = new WholesalerService();
+
+            var wholeSaler = _wholesalersService.GetWholesalerByID(usedItem.WholesalerID);
 
             BindingContext = new UsedItem
             {
@@ -28,6 +32,13 @@ namespace Demo.Views
                 Price = usedItem.Price,
                 Amount = usedItem.Amount,
                 Date = usedItem.Date
+            };
+
+            wholesaler.BindingContext = new Wholesaler
+            {
+                ID = wholeSaler.ID,
+                Name = wholeSaler.Name,
+                LogoURL = wholeSaler.LogoURL
             };
 
             _amount = usedItem.Amount;
