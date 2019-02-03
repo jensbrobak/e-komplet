@@ -1,4 +1,5 @@
 ﻿using System;
+using Demo.Models;
 using Demo.Services;
 using Xamarin.Forms;
 
@@ -15,6 +16,11 @@ namespace Demo.Views
 
             _usedItemsService = new UsedItemService();
 
+            OnPopulatingListView();
+        }
+
+        protected override void OnAppearing()
+        {
             OnPopulatingListView();
         }
 
@@ -50,6 +56,31 @@ namespace Demo.Views
                 usedItemsListView.ItemsSource = _usedItemsService.GetAllUsedItemsByLatest();
             }
 
+        }
+
+        async void OnUsedItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        {
+            if (usedItemsListView.SelectedItem == null)
+                return;
+
+            var selectedUsedItem = e.SelectedItem as UsedItem;
+
+            usedItemsListView.SelectedItem = null;
+
+            var page = new OpenItemPage(selectedUsedItem);
+            page.UsedItemUpdated += (source, usedItem) =>
+            {
+                selectedUsedItem.ID = usedItem.ID;
+                selectedUsedItem.WholesalerID = usedItem.WholesalerID;
+                selectedUsedItem.Name = usedItem.Name;
+                selectedUsedItem.Itemnumber = usedItem.Itemnumber;
+                selectedUsedItem.ItemGroup = usedItem.ItemGroup;
+                selectedUsedItem.Price = usedItem.Price;
+                selectedUsedItem.Amount = usedItem.Amount;
+                selectedUsedItem.Date = usedItem.Date;
+            };
+
+            await Navigation.PushAsync(page);
         }
 
         void OnAdd(object sender, System.EventArgs e)

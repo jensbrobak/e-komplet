@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.OpenItemPage">
+<ContentPage Title="Visning af materiale" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.OpenItemPage">
     <ContentPage.Content>
+        <TableView Intent="Form">
+        <TableRoot>
+            <TableSection Title="Materiale">
+                <EntryCell Label="Navn" Text="{Binding Name}" IsEnabled="false" />
+                <EntryCell Label="Nummer" Text="{Binding Itemnumber}" IsEnabled="false" />
+                <EntryCell Label="Gruppe" Text="{Binding ItemGroup}" IsEnabled="false" />
+                <EntryCell Label="Pris" Text="{Binding Price}" IsEnabled="false" />
+                <EntryCell Label="Antal" Text="{Binding Amount}" IsEnabled="false" />
+            </TableSection>
+            <TableSection Title="Grossist">
+                <EntryCell Label="Grossist ID" Text="{Binding WholesalerID}" IsEnabled="false" />
+            </TableSection>
+            <TableSection Title="Tilføj Antal af enheder til opgave">
+                <EntryCell Label="Antal:" Text="{Binding Amount}" Keyboard="Numeric" />
+                <ViewCell>
+                    <Button Text="Tilføj" Clicked="OnSave" />
+                </ViewCell>
+            </TableSection>
+           <TableSection Title="Senest opdateret">
+                <EntryCell Label="Dato" Text="{Binding Date}" IsEnabled="false" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
     </ContentPage.Content>
 </ContentPage>

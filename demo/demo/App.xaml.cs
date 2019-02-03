@@ -16,7 +16,7 @@ namespace Demo
 
             //OnCreateDb();
 
-            MainPage = new ListViewPage();
+            MainPage = new NavigationPage(new ListViewPage());
         }
         
         public async void OnCreateDb()

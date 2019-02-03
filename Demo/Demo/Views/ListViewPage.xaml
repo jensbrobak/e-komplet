@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.ListViewPage">
+<ContentPage Title="Materialer" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.ListViewPage">
+                <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Tilføj materiale" Clicked="OnAdd" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-    <StackLayout>
-            <StackLayout Orientation="Horizontal">
-            <Button Text="Tilføj materiale" Clicked="OnAdd" />
-        </StackLayout>
+        <StackLayout>
             <SearchBar 
             Placeholder="Søg efter materialer" 
             TextChanged="OnSearchTextChanged" 
@@ -15,7 +15,7 @@
             <x:String>Seneste materialer</x:String>
             </Picker.Items>
             </Picker>
-        <ListView x:Name="usedItemsListView" HasUnevenRows="true">
+        <ListView x:Name="usedItemsListView" HasUnevenRows="true" ItemSelected="OnUsedItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                         
@@ -23,15 +23,12 @@
         <StackLayout>
         <Label Text="{Binding Name}" Font="15,Bold" />
         <Label Text="{Binding Amount, StringFormat='Antal: {0}'}"/>
-        <Label Text="{Binding Itemnumber, StringFormat='Materialenr.: {0}'}"/>
-        <Label Text="{Binding ItemGroup, StringFormat='Materialekategori: {0}'}"/>
-        <Label Text="{Binding Date}" TextColor="Gray" />
         </StackLayout>
       </ViewCell>
                   
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackLayout>
+            </StackLayout>
     </ContentPage.Content>
 </ContentPage>
