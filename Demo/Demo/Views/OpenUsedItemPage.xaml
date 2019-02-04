@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Bestil materiale" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.OpenItemPage">
+<ContentPage Title="Visning af materiale" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.OpenUsedItemPage">
     <ContentPage.Content>
         <TableView Intent="Form">
         <TableRoot>
@@ -8,18 +8,19 @@
                 <EntryCell Label="Nummer" Text="{Binding Itemnumber}" IsEnabled="false" />
                 <EntryCell Label="Gruppe" Text="{Binding ItemGroup}" IsEnabled="false" />
                 <EntryCell Label="Pris" Text="{Binding Price}" IsEnabled="false" />
+                <EntryCell Label="Antal" Text="{Binding Amount}" IsEnabled="false" />
             </TableSection>
-            <TableSection Title="Vælg tilgængelig Grossist">
-            <ViewCell>
-            <Picker x:Name="dropdownMenu" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnPickerSelectedIndexChanged" 
-                    ItemDisplayBinding="{Binding WholesalerID}" SelectedItem="{Binding WholesalerID}" />
-            </ViewCell>
+            <TableSection Title="Grossist" x:Name="wholesaler">
+                <EntryCell Label="Navn" Text="{Binding Name}" IsEnabled="false" />
             </TableSection>
-            <TableSection Title="Antal af enheder til bestilling" x:Name="usedItemModel">
+            <TableSection Title="Tilføj Antal af enheder til opgave">
                 <EntryCell Label="Antal:" Text="{Binding Amount}" Keyboard="Numeric" />
                 <ViewCell>
-                    <Button Text="Bestil" Clicked="OnSave" />
+                    <Button Text="Tilføj" Clicked="OnSave" />
                 </ViewCell>
+            </TableSection>
+           <TableSection Title="Senest opdateret">
+                <EntryCell Label="Dato" Text="{Binding Date}" IsEnabled="false" />
             </TableSection>
         </TableRoot>
     </TableView>

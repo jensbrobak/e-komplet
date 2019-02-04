@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Demo.Views
 {
-    public partial class AddItem : ContentPage
+    public partial class AddUsedItemPage : ContentPage
     {
-        public AddItem()
+        public AddUsedItemPage()
         {
             InitializeComponent();
         }

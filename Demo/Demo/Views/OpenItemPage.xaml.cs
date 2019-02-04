@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Demo.Models;
 using Demo.Services;
 using Xamarin.Forms;
@@ -8,72 +7,80 @@ namespace Demo.Views
 {
     public partial class OpenItemPage : ContentPage
     {
-        public event EventHandler<UsedItem> UsedItemUpdated;
+        public event EventHandler<Item> ItemUpdated;
+        private ItemService _itemsService;
         private UsedItemService _usedItemsService;
-        private WholesalerService _wholesalersService;
+        private Item_WholesalerService _items_WholesalersService;
+        int _wholesalerID;
         double _amount;
 
-        public OpenItemPage(UsedItem usedItem)
+        public OpenItemPage(Item item)
         {
             InitializeComponent();
 
+            _itemsService = new ItemService();
+            _items_WholesalersService = new Item_WholesalerService();
             _usedItemsService = new UsedItemService();
-            _wholesalersService = new WholesalerService();
 
-            var wholeSaler = _wholesalersService.GetWholesalerByID(usedItem.WholesalerID);
-
-            BindingContext = new UsedItem
+            BindingContext = new Item
             {
-                ID = usedItem.ID,
-                WholesalerID = usedItem.WholesalerID,
-                Name = usedItem.Name,
-                Itemnumber = usedItem.Itemnumber,
-                ItemGroup = usedItem.ItemGroup,
-                Price = usedItem.Price,
-                Amount = usedItem.Amount,
-                Date = usedItem.Date
+                ID = item.ID,
+                Name = item.Name,
+                Itemnumber = item.Itemnumber,
+                ItemGroup = item.ItemGroup,
+                Price = item.Price,
+                ImageURL = item.ImageURL
             };
 
-            wholesaler.BindingContext = new Wholesaler
+            dropdownMenu.ItemsSource = _items_WholesalersService.GetAllWholesalersByItemID(item.Itemnumber);
+            dropdownMenu.SelectedIndex = 0;
+
+            usedItemModel.BindingContext = new UsedItem
             {
-                ID = wholeSaler.ID,
-                Name = wholeSaler.Name,
-                LogoURL = wholeSaler.LogoURL
+                WholesalerID = _wholesalerID,
+                Name = item.Name,
+                Itemnumber = item.Itemnumber,
+                ItemGroup = item.ItemGroup,
+                Price = item.Price,
+                Amount = _amount
             };
 
-            _amount = usedItem.Amount;
+        }
+
+        void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Picker picker = (Picker)sender;
+
+            //var selectedItem = (Wholesaler)picker.SelectedItem;
+
+            //_wholesalerID = selectedItem.ID;
+
         }
 
         async void OnSave(object sender, System.EventArgs e)
         {
-            var usedItem = BindingContext as UsedItem;
+            var item = BindingContext as Item;
 
-            if(usedItem.Amount > _amount)
+            var usedItem = usedItemModel.BindingContext as UsedItem;
+
+            usedItem.Date = DateTime.UtcNow;
+
+            var item_Wholesaler = new Item_Wholesaler
             {
-                await DisplayAlert("Advarsel", "Der er desværre ikke nok tilgængelige enheder af dette materiale!", "Ok");
-            } 
-            if(_amount == 0) 
-            {
-                await DisplayAlert("Advarsel", "Beholdning er tom - der skal bestilles flere enheder af dette materiale hjem!", "Ok");
-            }
-            else 
-            {
+                Itemnumber = item.Itemnumber,
+                WholesalerID = _wholesalerID
+            };
 
-                usedItem.Amount = _amount - usedItem.Amount;
+            _items_WholesalersService.SaveItem_Wholesaler(item_Wholesaler);
+            _usedItemsService.SaveUsedItem(usedItem);
 
-                usedItem.Date = DateTime.UtcNow;
+            await DisplayAlert("Bekræftelse", "Du har bestilt " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet", "Ok");
 
-                _usedItemsService.SaveUsedItem(usedItem);
+            ItemUpdated?.Invoke(this, item);
 
-                await DisplayAlert("Bekræftelse", "Du har tilføjet " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet til denne opgave", "Ok");
-
-                UsedItemUpdated?.Invoke(this, usedItem);
-
-                await Navigation.PopAsync();
+            await Navigation.PopAsync();
 
             }
-
 
         }
     }
-}

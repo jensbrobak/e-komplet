@@ -23,8 +23,8 @@ namespace Demo.Services
 
         public List<UsedItem> GetAllUsedItemsByLatest()
         {
-            // linq query som nedhenter 5 useditems til liste - hvorefter de bliver sorteret efter date
-            return _connection.Table<UsedItem>().OrderByDescending(ui => ui.Date).Take(5).ToListAsync().Result;
+            // linq query som nedhenter 10 useditems til liste - hvorefter de bliver sorteret efter date
+            return _connection.Table<UsedItem>().OrderByDescending(ui => ui.Date).Take(10).ToListAsync().Result;
         }
 
         public List<UsedItem> GetUsedItemsBySearch(string keyword)
@@ -34,6 +34,11 @@ namespace Demo.Services
         }
 
         public void SaveUsedItem(UsedItem usedItem)
+        {
+            _connection.InsertAsync(usedItem);
+        }
+
+        public void UpdateUsedItem(UsedItem usedItem)
         {
             _connection.UpdateAsync(usedItem);
         }

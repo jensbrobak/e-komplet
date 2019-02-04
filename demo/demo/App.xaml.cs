@@ -16,7 +16,7 @@ namespace Demo
 
             //OnCreateDb();
 
-            MainPage = new NavigationPage(new ListViewPage());
+            MainPage = new NavigationPage(new ListViewUsedItemPage());
         }
         
         public async void OnCreateDb()
@@ -29,6 +29,7 @@ namespace Demo
             await connection.CreateTableAsync<Item>();
             await connection.CreateTableAsync<UsedItem>();
             await connection.CreateTableAsync<Wholesaler>();
+            await connection.CreateTableAsync<Item_Wholesaler>();
 
             // opretter test data ud fra de tre ovenstående entiteter
             var item1 = new Item
@@ -37,7 +38,7 @@ namespace Demo
                 ImageURL = "https://dummyimage.com/300x200/000/fff&text=Skrue3",
                 ItemGroup = "Skruer",
                 Itemnumber = "1-01",
-                Price = 0.5,
+                Price = 0.5
             };
 
             var item2 = new Item
@@ -83,12 +84,33 @@ namespace Demo
                 LogoURL = "https://dummyimage.com/300x200/000/fff&text=E-KompletRUS"
             };
 
+            var itemWholesaler1 = new Item_Wholesaler
+            {
+                Itemnumber = "1-01",
+                WholesalerID = 1
+            };
+
+            var itemWholesaler2 = new Item_Wholesaler
+            {
+                Itemnumber = "1-01",
+                WholesalerID = 2
+            };
+
+            var itemWholesaler3 = new Item_Wholesaler
+            {
+                Itemnumber = "1-02",
+                WholesalerID = 2
+            };
+
             await connection.InsertAsync(item1);
             await connection.InsertAsync(item2);
             await connection.InsertAsync(usedItem1);
             await connection.InsertAsync(usedItem2);
             await connection.InsertAsync(wholesaler1);
             await connection.InsertAsync(wholesaler2);
+            await connection.InsertAsync(itemWholesaler1);
+            await connection.InsertAsync(itemWholesaler2);
+            await connection.InsertAsync(itemWholesaler3);
 
         }
 

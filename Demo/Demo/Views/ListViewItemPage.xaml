@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage Title="Vælg Materiale" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Demo.Views.ListViewItemPage">
+    <ContentPage.Content>
+        <StackLayout>
+        <ListView x:Name="itemsListView" HasUnevenRows="true" ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                        
+      <ViewCell>
+        <StackLayout Orientation="Horizontal">
+        <Image Source="{Binding ImageURL}" />
+        <StackLayout>
+        <Label Text="{Binding Name, StringFormat='Navn: {0}'}"/>
+        <Label Text="{Binding Price, StringFormat='Pris: {0} kr'}"/>
+        </StackLayout>
+       </StackLayout>
+      </ViewCell>
+                  
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

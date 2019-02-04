@@ -6,17 +6,15 @@ using Xamarin.Forms;
 namespace Demo.Views
 {
 
-    public partial class ListViewPage : ContentPage
+    public partial class ListViewUsedItemPage : ContentPage
     {
         private UsedItemService _usedItemsService;
 
-        public ListViewPage()
+        public ListViewUsedItemPage()
         {
             InitializeComponent();
 
             _usedItemsService = new UsedItemService();
-
-            OnPopulatingListView();
         }
 
         protected override void OnAppearing()
@@ -67,7 +65,7 @@ namespace Demo.Views
 
             usedItemsListView.SelectedItem = null;
 
-            var page = new OpenItemPage(selectedUsedItem);
+            var page = new OpenUsedItemPage(selectedUsedItem);
             page.UsedItemUpdated += (source, usedItem) =>
             {
                 selectedUsedItem.ID = usedItem.ID;
@@ -83,8 +81,9 @@ namespace Demo.Views
             await Navigation.PushAsync(page);
         }
 
-        void OnAdd(object sender, System.EventArgs e)
+        async void OnAdd(object sender, System.EventArgs e)
         {
+            await Navigation.PushAsync(new ListViewItemPage());
         }
 
     }
