@@ -49,12 +49,11 @@ namespace Demo.Views
 
         void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         {
-            //Picker picker = (Picker)sender;
+            Picker picker = (Picker)sender;
 
-            //var selectedItem = (Wholesaler)picker.SelectedItem;
+            var selectedItem = (Wholesaler)picker.SelectedItem;
 
-            //_wholesalerID = selectedItem.ID;
-
+            _wholesalerID = selectedItem.ID;
         }
 
         async void OnSave(object sender, System.EventArgs e)
@@ -65,13 +64,6 @@ namespace Demo.Views
 
             usedItem.Date = DateTime.UtcNow;
 
-            var item_Wholesaler = new Item_Wholesaler
-            {
-                Itemnumber = item.Itemnumber,
-                WholesalerID = _wholesalerID
-            };
-
-            _items_WholesalersService.SaveItem_Wholesaler(item_Wholesaler);
             _usedItemsService.SaveUsedItem(usedItem);
 
             await DisplayAlert("Bekræftelse", "Du har bestilt " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet", "Ok");

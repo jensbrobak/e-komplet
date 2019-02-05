@@ -12,7 +12,7 @@
             <TableSection Title="Vælg tilgængelig Grossist">
             <ViewCell>
             <Picker x:Name="dropdownMenu" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnPickerSelectedIndexChanged" 
-                    ItemDisplayBinding="{Binding WholesalerID}" SelectedItem="{Binding WholesalerID}" />
+                    ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding ID}" />
             </ViewCell>
             </TableSection>
             <TableSection Title="Antal af enheder til bestilling" x:Name="usedItemModel">
