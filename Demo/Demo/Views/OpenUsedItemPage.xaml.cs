@@ -65,9 +65,9 @@ namespace Demo.Views
 
                 _usedItemsService.SaveUsedItem(usedItem);
 
-                await DisplayAlert("Bekræftelse", "Du har tilføjet " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet til denne opgave", "Ok");
-
                 UsedItemUpdated?.Invoke(this, usedItem);
+
+                await DisplayAlert("Bekræftelse", "Du har tilføjet " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet til denne opgave", "Ok");
 
                 await Navigation.PopAsync();
 

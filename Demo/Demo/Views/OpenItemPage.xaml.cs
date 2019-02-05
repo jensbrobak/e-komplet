@@ -12,6 +12,7 @@ namespace Demo.Views
         private UsedItemService _usedItemsService;
         private Item_WholesalerService _items_WholesalersService;
         int _wholesalerID;
+        string _wholesalerName;
         double _amount;
 
         public OpenItemPage(Item item)
@@ -54,6 +55,7 @@ namespace Demo.Views
             var selectedItem = (Wholesaler)picker.SelectedItem;
 
             _wholesalerID = selectedItem.ID;
+            _wholesalerName = selectedItem.Name;
         }
 
         async void OnSave(object sender, System.EventArgs e)
@@ -62,11 +64,20 @@ namespace Demo.Views
 
             var usedItem = usedItemModel.BindingContext as UsedItem;
 
+            usedItem.WholesalerID = _wholesalerID;
+
             usedItem.Date = DateTime.UtcNow;
 
-            _usedItemsService.SaveUsedItem(usedItem);
+            if(_amount == 0)
+            {
+                await DisplayAlert("Advarsel", "Du kan ikke bestille " + _amount + " enheder!", "Ok");
+            }
+            else
+            {
+                _usedItemsService.SaveUsedItem(usedItem);
 
-            await DisplayAlert("Bekræftelse", "Du har bestilt " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet", "Ok");
+                await DisplayAlert("Bekræftelse", "Du har bestilt " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet fra " + _wholesalerName + "", "Ok");
+            }
 
             ItemUpdated?.Invoke(this, item);
 

@@ -9,7 +9,7 @@
                 <EntryCell Label="Gruppe" Text="{Binding ItemGroup}" IsEnabled="false" />
                 <EntryCell Label="Pris" Text="{Binding Price}" IsEnabled="false" />
             </TableSection>
-            <TableSection Title="Vælg tilgængelig Grossist">
+            <TableSection Title="Vælg en tilgængelig Grossist">
             <ViewCell>
             <Picker x:Name="dropdownMenu" HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnPickerSelectedIndexChanged" 
                     ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding ID}" />
