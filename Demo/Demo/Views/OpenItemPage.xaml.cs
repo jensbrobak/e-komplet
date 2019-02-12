@@ -68,7 +68,7 @@ namespace Demo.Views
 
             usedItem.Date = DateTime.UtcNow;
 
-            if(_amount == 0)
+            if(usedItem.Amount == 0)
             {
                 await DisplayAlert("Advarsel", "Du kan ikke bestille " + _amount + " enheder!", "Ok");
             }

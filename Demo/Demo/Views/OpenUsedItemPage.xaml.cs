@@ -12,6 +12,7 @@ namespace Demo.Views
         private UsedItemService _usedItemsService;
         private WholesalerService _wholesalersService;
         double _amount;
+        double _confirmedAmount;
 
         public OpenUsedItemPage(UsedItem usedItem)
         {
@@ -58,6 +59,7 @@ namespace Demo.Views
             }
             else 
             {
+                _confirmedAmount = usedItem.Amount;
 
                 usedItem.Amount = _amount - usedItem.Amount;
 
@@ -67,7 +69,7 @@ namespace Demo.Views
 
                 UsedItemUpdated?.Invoke(this, usedItem);
 
-                await DisplayAlert("Bekræftelse", "Du har tilføjet " + usedItem.Amount + " enheder af " + usedItem.Name + " materialet til denne opgave", "Ok");
+                await DisplayAlert("Bekræftelse", "Du har tilføjet " + _confirmedAmount + " enheder af " + usedItem.Name + " materialet til denne opgave", "Ok");
 
                 await Navigation.PopAsync();
 
