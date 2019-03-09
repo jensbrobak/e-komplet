@@ -65,7 +65,7 @@ namespace Demo.Views
 
                 usedItem.Date = DateTime.UtcNow;
 
-                _usedItemsService.SaveUsedItem(usedItem);
+                _usedItemsService.UpdateUsedItem(usedItem);
 
                 UsedItemUpdated?.Invoke(this, usedItem);
 
